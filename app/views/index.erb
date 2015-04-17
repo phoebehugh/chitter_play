@@ -1,0 +1,36 @@
+<% if @username %>
+Welcome, <%= @username %>
+
+Write a Peep
+<div id='new-peep'>
+<form action='/peeps/new' method='post'>
+  <input type='text' name="peep" placeholder="Write your peep">
+  <input type='submit' value='Submit'>
+</form>
+</div>
+
+<ul>
+  <% @peeps.each do |peep| %>
+    <b><%= peep.text %></b><br>Posted by <%= peep.user.name %><br><br>
+  <% end %>
+</ul>
+
+<% else %>
+
+<h2>Please sign in</h2>
+
+<div id='sign-in'>
+<form action='/sessions/new' method='post'>
+  <input type='text' name="username" placeholder="Username">
+  <input type='password' name="password" placeholder="Password">
+  <input type='submit' value='Submit'>
+</form>
+</div>
+<br>
+
+<h3>New to Chitter?</h3> 
+<a href="/users/new">Sign up here!</a>
+
+
+
+<% end %>
