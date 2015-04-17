@@ -19,6 +19,7 @@ end
 
 post '/sessions/new' do
   session[:username] = params[:username]
+  user = User(username: params[:username])
   redirect '/'
 end
 
