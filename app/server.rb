@@ -5,6 +5,7 @@ DataMapper.setup(:default, 'postgres://localhost/play')
 
 require './app/models/user'
 require './app/models/peep'
+require_relative 'helpers/application'
 
 DataMapper.finalize
 DataMapper.auto_upgrade!
@@ -12,19 +13,18 @@ DataMapper.auto_upgrade!
 enable :sessions
 
 get '/' do
-  user = User.get(id: session[:user_id])
-  @username = user.username
   @peeps = Peep.all
   erb :index
 end
 
 post '/sessions/new' do
-  user = User(username: params[:username])
+  user = User.first(username: params[:username])
   session[:user_id] = user.id
   redirect '/'
 end
 
 post '/peeps/new' do
+  current_user.peeps.create(text: params[:peep])
   redirect '/'
 end
 

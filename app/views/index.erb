@@ -1,5 +1,5 @@
-<% if @username %>
-Welcome, <%= @username %>
+<% if current_user %>
+Welcome, <%= current_user.username %>
 
 Write a Peep
 <div id='new-peep'>
