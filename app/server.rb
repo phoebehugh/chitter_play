@@ -33,9 +33,9 @@ end
 post '/users/new' do
   user = User.new username: params[:username],
                   name: params[:name],
-                  password: params[:password]
+                  password: params[:password],
                   password_confirmation: params[:password_confirmation]
   user.save #create the user object and then if there is an issue it lets you know why its false
-  session[:username] = params[:username]
+  session[:user_id] = user.id
   redirect '/'
 end

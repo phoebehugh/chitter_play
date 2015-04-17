@@ -1,6 +1,6 @@
-# helpers do
+helpers do
   
-#   def current_user
-#     @current_user ||= User.get
+  def current_user
+    @current_user ||= User.get
 
-# end
+end
