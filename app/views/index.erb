@@ -11,7 +11,7 @@ Write a Peep
 
 <ul>
   <% @peeps.each do |peep| %>
-    <b><%= peep.text %></b><br>Posted by <%= peep.user.name %><br><br>
+    <b><%= peep.text %></b><br>Posted by <%= peep.user.username %><br><br>
   <% end %>
 </ul>
 
