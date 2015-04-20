@@ -30,18 +30,20 @@ post '/peeps/new' do
 end
 
 get '/users/new' do
+  @user = User.new
   erb :users
 end
 
 post '/users/new' do
-  @user = User.new username: params[:username],
+  @user = User.new   username: params[:username],
                      name: params[:name],
+                     email: params[:email],
                      password: params[:password],
                      password_confirmation: params[:password_confirmation]
   if @user.save #create the user object and then if there is an issue it lets you know why its false
     session[:user_id] = @user.id
     redirect '/'
   else
-    redirect '/users/new'
+    erb :users
   end
 end
