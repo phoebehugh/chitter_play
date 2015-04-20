@@ -11,6 +11,7 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 enable :sessions
+set :session_secret, 'super secret'
 
 get '/' do
   @peeps = Peep.all
@@ -33,11 +34,14 @@ get '/users/new' do
 end
 
 post '/users/new' do
-  user = User.new username: params[:username],
-                  name: params[:name],
-                  password: params[:password],
-                  password_confirmation: params[:password_confirmation]
-  user.save #create the user object and then if there is an issue it lets you know why its false
-  session[:user_id] = user.id
-  redirect '/'
+  @user = User.new username: params[:username],
+                     name: params[:name],
+                     password: params[:password],
+                     password_confirmation: params[:password_confirmation]
+  if @user.save #create the user object and then if there is an issue it lets you know why its false
+    session[:user_id] = @user.id
+    redirect '/'
+  else
+    redirect '/users/new'
+  end
 end

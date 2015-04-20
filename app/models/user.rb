@@ -6,7 +6,10 @@ class User
   include DataMapper::Resource
   include BCrypt
 
-  attr_accessor :password, :password_confirmation
+  attr_reader :password
+  attr_accessor :password_confirmation
+
+  validates_confirmation_of :password
 
   property :id,              Serial
   property :name,            String

@@ -73,6 +73,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  bcrypt-ruby
   data_mapper
   dm-postgres-adapter
   sinatra
